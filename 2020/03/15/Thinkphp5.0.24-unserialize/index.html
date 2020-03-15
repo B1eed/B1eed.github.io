@@ -81,7 +81,7 @@
         <div class="post-title">
             <h2 class="title">Thinkphp5.0.24 反序列化链学习</h2>
             <div class="post-meta">
-                <span class="post-time">2020-03-08</span>
+                <span class="post-time">2020-03-15</span>
                 
                 <span class="post-visit"> 阅读次数：<span id="busuanzi_value_page_pv"></span></span>
             </div>
@@ -96,7 +96,7 @@
         <div class="post-content">
             <p><em>这条链是某师傅在先知对一个Tp5.0.24开发的CMS审计时发现的一个触发点的利用,本来该利用点只能完成SSRF与任意文件删除的,为了提升危害,于是又从TP5.0.24中挖掘出了这一条通过写入文件Getshell的的Pop链(师傅们实在tql,枯了)</em></p>
 <p>关于这条链先知上已经有几篇分析过了,了解了几点:</p>
-<p>1.当目标目录无写入权限时我们可以创建一个权限为0777的文件夹,然后写shell</p>
+<p>1.当目标目录无写入权限时我们可以创建一个权限为0755的文件夹,然后写shell</p>
 <p>2.使用php伪协议写入shell绕过死亡exit,因为文件名不可控所以Windows下无法利用(后面可以知道原因)</p>
 <blockquote>
 <h3 id="0x01"><a href="#0x01" class="headerlink" title="0x01"></a>0x01</h3></blockquote>
@@ -168,6 +168,12 @@
 </div>
 <div class="paginator">
     
+        
+            <a class="prev" href="/2020/03/15/CVE-2020-2551/">
+                <i class="iconfont icon-prev"></i>
+                <span class="nav-default">CVE-2020-2551复现</span>
+                <span class="nav-mobile">上一篇</span>
+            </a>
         
         
             <a class="next" href="/2020/03/07/rdpcliphook/">
