@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
+<!--<![endif]-->
+
+<head>
+  <title>Thinkphp5.0.24 反序列化链学习 | 1x2Bytes Blog</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="1x2Bytes Blog">
+    <meta name="author" content="1x2Bytes">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="1x2Bytes Blog" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+    
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+  
+  
+  
+
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">Coder</a></li>
+                    
+                        <li><a href="/" target="_BLANK" class="animsition-link">Research</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a target="_blank" rel="noopener" href="https://blog.hl0rey.com/" class="animsition-link">hl0rey(我的师傅)</a></li>
+                    
+                    <li><a target="_blank" rel="noopener" href="http://www.se7ensec.cn/" class="animsition-link">7师傅</a></li>
+                    
+                    <li><a target="_blank" rel="noopener" href="http://www.free04k.cn/" class="animsition-link">F牛</a></li>
+                    
+                    <li><a target="_blank" rel="noopener" href="https://patrilic.top/" class="animsition-link">patrilic</a></li>
+                    
+                    <li><a target="_blank" rel="noopener" href="http://www.ashesec.top/" class="animsition-link">Ashe师傅</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            
+            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">1x2Bytes Blog</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/B1eed" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2020-03-25T17:09:04.000Z" itemprop="datePublished">
+          2020-03-26
+      </time>
+    
+</span>
+                <h1>Thinkphp5.0.24 反序列化链学习</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<p><em>这条链是某师傅在先知对一个Tp5.0.24开发的CMS审计时发现的一个触发点的利用,本来该利用点只能完成SSRF与任意文件删除的,为了提升危害,于是又从TP5.0.24中挖掘出了这一条通过写入文件Getshell的的Pop链(师傅们实在tql,枯了)</em></p>
+<p>关于这条链先知上已经有几篇分析过了,了解了几点:</p>
+<p>1.当目标目录无写入权限时我们可以创建一个权限为0755的文件夹,然后写shell</p>
+<p>2.使用php伪协议写入shell绕过死亡exit,因为文件名不可控所以Windows下无法利用(后面可以知道原因)</p>
+<blockquote>
+<p>0x01</p>
+</blockquote>
+<p>学习开始,首先开头还是Tp5.1.x中的那条链,具体看我的PaperBook仓库中有详细分析的过程,然后到removeFiles这个方法文件名传入对象触发<code>__toString</code>魔术方法然后到<code>thinkphp/library/think/Model.php</code> 853行的toArray方法开始,原来在5.1.x是利用访问某类中不存在的方法触发<code>__call</code>魔术方法,但是在5.0.x中hook变为静态属性(关于静态属性为何不能利用可以看php相关知识),所以得重新寻找可以利用的地方触发<code>__call</code>魔术方法,先看toArray这个方法在什么位置触发的<code>__call</code>,又是如何触发的 因为图片Base64显示太大了,所以直接代码吧 XD.</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!<span class="keyword">empty</span>(<span class="keyword">$this</span>-&gt;append)) &#123;</span><br><span class="line">    <span class="keyword">foreach</span> (<span class="keyword">$this</span>-&gt;append <span class="keyword">as</span> $key =&gt; $name) &#123;</span><br><span class="line">        <span class="keyword">if</span> (is_array($name)) &#123;</span><br><span class="line">            <span class="comment">// 追加关联对象属性</span></span><br><span class="line">            $relation   = <span class="keyword">$this</span>-&gt;getAttr($key);</span><br><span class="line">            $item[$key] = $relation-&gt;append($name)-&gt;toArray();<span class="comment">//这一处</span></span><br><span class="line">        &#125; <span class="keyword">elseif</span> (strpos($name, <span class="string">&#x27;.&#x27;</span>)) &#123;</span><br><span class="line">            <span class="keyword">list</span>($key, $attr) = explode(<span class="string">&#x27;.&#x27;</span>, $name);</span><br><span class="line">            <span class="comment">// 追加关联对象属性</span></span><br><span class="line">            $relation   = <span class="keyword">$this</span>-&gt;getAttr($key);</span><br><span class="line">            $item[$key] = $relation-&gt;append([$attr])-&gt;toArray();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            $relation = Loader::parseName($name, <span class="number">1</span>, <span class="literal">false</span>);</span><br><span class="line">            <span class="keyword">if</span> (method_exists(<span class="keyword">$this</span>, $relation)) &#123;</span><br><span class="line">                $modelRelation = <span class="keyword">$this</span>-&gt;$relation();</span><br><span class="line">                $value         = <span class="keyword">$this</span>-&gt;getRelationData($modelRelation);</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (method_exists($modelRelation, <span class="string">&#x27;getBindAttr&#x27;</span>)) &#123;</span><br><span class="line">                    $bindAttr = $modelRelation-&gt;getBindAttr();</span><br><span class="line">                    <span class="keyword">if</span> ($bindAttr) &#123;</span><br><span class="line">                        <span class="keyword">foreach</span> ($bindAttr <span class="keyword">as</span> $key =&gt; $attr) &#123;</span><br><span class="line">                            $key = is_numeric($key) ? $attr : $key;</span><br><span class="line">                            <span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;data[$key])) &#123;</span><br><span class="line">                                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Exception</span>(<span class="string">&#x27;bind attr has exists:&#x27;</span> . $key);</span><br><span class="line">                            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                                $item[$key] = $value ? $value-&gt;getAttr($attr) : <span class="literal">null</span>;<span class="comment">//另?前的条件为真执行 $value-&gt;getAttr</span></span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="keyword">continue</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                $item[$name] = $value;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                $item[$name] = <span class="keyword">$this</span>-&gt;getAttr($name);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>看代码,首先append变量我们可控,然后前两个分支第一个是判断$name是否为数组,第二个是判断$name中是否存在<code>&quot;.&quot;</code>,前两个分支显然是不满足我们的需求的,于是直接到else中,我们看看else的代码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">$relation = Loader::parseName($name, <span class="number">1</span>, <span class="literal">false</span>);</span><br><span class="line">               <span class="keyword">if</span> (method_exists(<span class="keyword">$this</span>, $relation)) &#123;</span><br><span class="line">                   $modelRelation = <span class="keyword">$this</span>-&gt;$relation();</span><br><span class="line">                   $value         = <span class="keyword">$this</span>-&gt;getRelationData($modelRelation);</span><br><span class="line"></span><br><span class="line">                   <span class="keyword">if</span> (method_exists($modelRelation, <span class="string">&#x27;getBindAttr&#x27;</span>)) &#123;</span><br><span class="line">                       $bindAttr = $modelRelation-&gt;getBindAttr();</span><br><span class="line">                       <span class="keyword">if</span> ($bindAttr) &#123;</span><br><span class="line">                           <span class="keyword">foreach</span> ($bindAttr <span class="keyword">as</span> $key =&gt; $attr) &#123;</span><br><span class="line">                               $key = is_numeric($key) ? $attr : $key;</span><br><span class="line">                               <span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;data[$key])) &#123;</span><br><span class="line">                                   <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Exception</span>(<span class="string">&#x27;bind attr has exists:&#x27;</span> . $key);</span><br><span class="line">                               &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                                   $item[$key] = $value ? $value-&gt;getAttr($attr) : <span class="literal">null</span>;<span class="comment">//另?前的条件为真执行 $value-&gt;getAttr</span></span><br><span class="line">                               &#125;</span><br><span class="line">                           &#125;</span><br><span class="line">                           <span class="keyword">continue</span>;</span><br><span class="line">                       &#125;</span><br><span class="line">                   &#125;</span><br><span class="line">                   $item[$name] = $value;</span><br><span class="line">               &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                   $item[$name] = <span class="keyword">$this</span>-&gt;getAttr($name);</span><br><span class="line">               &#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>$relation = Loader::parseName($name, 1, false)</code>追踪了一下意义不大,我们直接看满足条件后的赋值</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$modelRelation = <span class="keyword">$this</span>-&gt;$relation();</span><br><span class="line">$value        = <span class="keyword">$this</span>-&gt;getRelationData($modelRelation);</span><br></pre></td></tr></table></figure>
+
+<p>我们要使$relation为我们当前类存在的方法(method_exists函数),且方法中返回的值我们可控,这里就找到了1608行的getError方法</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getError</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;error;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中error可控,代表$modelRelation可控,<code>$value = $this-&gt;getRelationData($modelRelation)</code></p>
+<p>$modelRelation经过getRelationData方法处理后赋值给了$value,我们跟踪一下getRelationData方法,看看他是如何处理$modelRelation,跟踪到639行</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">getRelationData</span>(<span class="params">Relation $modelRelation</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;parent &amp;&amp; !$modelRelation-&gt;isSelfRelation() &amp;&amp; get_class($modelRelation-&gt;getModel()) == get_class(<span class="keyword">$this</span>-&gt;parent)) &#123;</span><br><span class="line">        $value = <span class="keyword">$this</span>-&gt;parent;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 首先获取关联数据</span></span><br><span class="line">        <span class="keyword">if</span> (method_exists($modelRelation, <span class="string">&#x27;getRelation&#x27;</span>)) &#123;</span><br><span class="line">            $value = $modelRelation-&gt;getRelation();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">BadMethodCallException</span>(<span class="string">&#x27;method not exists:&#x27;</span> . get_class($modelRelation) . <span class="string">&#x27;-&gt; getRelation&#x27;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> $value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到传入类型需为Relation,需要满足<code>$this-&gt;parent &amp;&amp; !$modelRelation-&gt;isSelfRelation() &amp;&amp; get_class($modelRelation-&gt;getModel()) == get_class($this-&gt;parent)</code>这样$value就能返回我们控制的值,其中$value设置的类中需要有getBindAttr方法,才能满足条件进入,在if判断中的3个条件,我们寻找满足条件的类,可以找到HasOne类满足我们的条件,类型为Relation,同时<em>isSelfRelation()</em>,<em>$this-&gt;parent</em>,<em>get_class($modelRelation-&gt;getModel()) == get_class($this-&gt;parent)</em>,这3个条件中的值我们都可控,可以满足if的判断,但是可能我们会发现该类中并不能找到getBindAttr方法,无法通过method_exists的判断,但是看师傅的文章确实是使用该类,于是留心一下注意到了该类第一行的代码<code>class HasOne extends OneToOne</code>，继承自OneToOne类,跟进OneToOne,搜索getBindAttr方法,在222行找到该方法,其中bindAttr值可控</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    <span class="comment">//thinkphp/library/think/model/relation/OneToOne.php Line:222</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getBindAttr</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;bindAttr;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>到了我们触发__call魔术方法的关键之处</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$bindAttr = $modelRelation-&gt;getBindAttr();</span><br><span class="line"><span class="keyword">if</span> ($bindAttr) &#123;</span><br><span class="line">                                <span class="keyword">foreach</span> ($bindAttr <span class="keyword">as</span> $key =&gt; $attr) &#123;</span><br><span class="line">                                    $key = is_numeric($key) ? $attr : $key;</span><br><span class="line">                                    <span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;data[$key])) &#123;</span><br><span class="line">                                        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Exception</span>(<span class="string">&#x27;bind attr has exists:&#x27;</span> . $key);</span><br><span class="line">                                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                                        $item[$key] = $value ? $value-&gt;getAttr($attr) : <span class="literal">null</span>;</span><br><span class="line">                                    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>$bindAttr中的值是从OneToOne中的getBindAttr方法获取的,其中的值我们知道我们可控,$attr可控,$value可控我们就可以触发<code>__call</code>方法,寻找符合条件的类找到<code>thinkphp/library/think/console/Output.php</code>类208行中的__call方法,其中会调用该类中的block方法,需满足<code>in_array($method, $this-&gt;styles)</code>因为styles的值我们可控,设置为包含getAttr的数组即可</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__call</span>(<span class="params">$method, $args</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (in_array($method, <span class="keyword">$this</span>-&gt;styles)) &#123;</span><br><span class="line">        array_unshift($args, $method);</span><br><span class="line">        <span class="keyword">return</span> call_user_func_array([<span class="keyword">$this</span>, <span class="string">&#x27;block&#x27;</span>], $args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;handle &amp;&amp; method_exists(<span class="keyword">$this</span>-&gt;handle, $method)) &#123;</span><br><span class="line">        <span class="keyword">return</span> call_user_func_array([<span class="keyword">$this</span>-&gt;handle, $method], $args);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Exception</span>(<span class="string">&#x27;method not exists:&#x27;</span> . <span class="keyword">__CLASS__</span> . <span class="string">&#x27;-&gt;&#x27;</span> . $method);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>所以成功进入<code>return call_user_func_array([$this, &#39;block&#39;], $args);</code>,array_unshift这处在5.1的链中已经提过,在这条链中无太大影响故不提,我们继续追踪block方法,在Output类的122行</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">block</span>(<span class="params">$style, $message</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">$this</span>-&gt;writeln(<span class="string">&quot;&lt;&#123;$style&#125;&gt;&#123;$message&#125;&lt;/$style&gt;&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>调用了writeln方法,我们跟踪writeln方法,在141行</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">writeln</span>(<span class="params">$messages, $type = <span class="built_in">self</span>::OUTPUT_NORMAL</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">$this</span>-&gt;write($messages, <span class="literal">true</span>, $type);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>随后又调用了write方法,在152行</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">write</span>(<span class="params">$messages, $newline = <span class="literal">false</span>, $type = <span class="built_in">self</span>::OUTPUT_NORMAL</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">$this</span>-&gt;handle-&gt;write($messages, $newline, $type);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中handle可控,也就是说我们能访问任意带有write方法的类,全局查找write方法(一般在继承File类的类中)</p>
+<p>找到thinkphp/library/think/session/driver/Memcached.php(发现thinkphp/library/think/session/driver/Memcache.php文件也实现了相同功能,两者应该都能使用) 92行处</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">write</span>(<span class="params">$sessID, $sessData</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;handler-&gt;set(<span class="keyword">$this</span>-&gt;config[<span class="string">&#x27;session_name&#x27;</span>] . $sessID, $sessData, <span class="keyword">$this</span>-&gt;config[<span class="string">&#x27;expire&#x27;</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里调用了set方法,handler还是一样可控,我们可以访问带有set方法类,在文件<em>thinkphp/library/think/cache/driver/File.php</em> 141行</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">set</span>(<span class="params">$name, $value, $expire = <span class="literal">null</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (is_null($expire)) &#123;</span><br><span class="line">            $expire = <span class="keyword">$this</span>-&gt;options[<span class="string">&#x27;expire&#x27;</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> ($expire <span class="keyword">instanceof</span> \DateTime) &#123;</span><br><span class="line">            $expire = $expire-&gt;getTimestamp() - time();</span><br><span class="line">        &#125;</span><br><span class="line">        $filename = <span class="keyword">$this</span>-&gt;getCacheKey($name, <span class="literal">true</span>);</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;tag &amp;&amp; !is_file($filename)) &#123;</span><br><span class="line">            $first = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        $data = serialize($value);</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;options[<span class="string">&#x27;data_compress&#x27;</span>] &amp;&amp; function_exists(<span class="string">&#x27;gzcompress&#x27;</span>)) &#123;</span><br><span class="line">            <span class="comment">//数据压缩</span></span><br><span class="line">            $data = gzcompress($data, <span class="number">3</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        $data   = <span class="string">&quot;&lt;?php\n//&quot;</span> . sprintf(<span class="string">&#x27;%012d&#x27;</span>, $expire) . <span class="string">&quot;\n exit();?&gt;\n&quot;</span> . $data;</span><br><span class="line">        $result = file_put_contents($filename, $data);</span><br><span class="line">        <span class="keyword">if</span> ($result) &#123;</span><br><span class="line">            <span class="keyword">isset</span>($first) &amp;&amp; <span class="keyword">$this</span>-&gt;setTagItem($filename);</span><br><span class="line">            clearstatcache();</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里获取文件名是通过getCacheKey方法</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">getCacheKey</span>(<span class="params">$name, $auto = <span class="literal">false</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    $name = md5($name);</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;options[<span class="string">&#x27;cache_subdir&#x27;</span>]) &#123;</span><br><span class="line">        <span class="comment">// 使用子目录</span></span><br><span class="line">        $name = substr($name, <span class="number">0</span>, <span class="number">2</span>) . DS . substr($name, <span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;options[<span class="string">&#x27;prefix&#x27;</span>]) &#123;</span><br><span class="line">        $name = <span class="keyword">$this</span>-&gt;options[<span class="string">&#x27;prefix&#x27;</span>] . DS . $name;</span><br><span class="line">    &#125;</span><br><span class="line">    $filename = <span class="keyword">$this</span>-&gt;options[<span class="string">&#x27;path&#x27;</span>] . $name . <span class="string">&#x27;.php&#x27;</span>;</span><br><span class="line">    $dir      = dirname($filename);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ($auto &amp;&amp; !is_dir($dir)) &#123;</span><br><span class="line">        mkdir($dir, <span class="number">0755</span>, <span class="literal">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> $filename;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里需将可控数组options中的值cache_subdir与prefix设置一下,$filename是从options数组取path的值与传入的$name进行拼接为文件名,然后通过dirname函数返回目录,并判断目录是否存在,不存在则调用mkdir函数创建并返回$filename,这里文件名部分已经弄清楚了,我们来看要写入的数据,$value通过序列化后赋值给了$data变量,然后进行数据压缩,这一步我们可以设置options数组中的data_compress值来跳过这一步骤,随后在数据拼接的时候又加入了死亡exit,这时候可以利用php中伪协议来处理数据绕过,然后就到了file_put_contents函数中,但是$data我们从前面跟踪下来发现是无法控制的(前面默认传入的参数为true),我们继续看代码,当执行完file_put_contents函数后将返回结果赋值给$result然后执行了<code>isset($first) &amp;&amp; $this-&gt;setTagItem($filename)</code>,我们看setTagItem方法做了什么,首先$filename传入了该方法即$name变量</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">setTagItem</span>(<span class="params">$name</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;tag) &#123;</span><br><span class="line">        $key       = <span class="string">&#x27;tag_&#x27;</span> . md5(<span class="keyword">$this</span>-&gt;tag);</span><br><span class="line">        <span class="keyword">$this</span>-&gt;tag = <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;has($key)) &#123;</span><br><span class="line">            $value   = explode(<span class="string">&#x27;,&#x27;</span>, <span class="keyword">$this</span>-&gt;get($key));</span><br><span class="line">            $value[] = $name;</span><br><span class="line">            $value   = implode(<span class="string">&#x27;,&#x27;</span>, array_unique($value));</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            $value = $name;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;set($key, $value, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此时tag变量可控,$key的值我们就可以知道,然后$name($filename)又赋值给$value,最后将$key与$value继续传入set方法(此时写入的内容可控即第一次写入的文件名),文件名为$key即tag_md5(tag)-&gt;getCacheKey()-&gt;文件名：(path+md5(tag_md5(tag))+.php),将path中的值设置为带有php代码的值并进行处理绕过死亡exit即可实现写入webshell也正是因为文件名中path的值为php代码导致该链只能在linux下使用</p>
+<blockquote>
+<p>0x02</p>
+</blockquote>
+<p>流程大概是</p>
+<ol>
+<li><p>第一次写入文件,文件内容不可控,然后进入setTagItem方法第二次写文件</p>
+</li>
+<li><p>第二次写文件,文件内容为第一次序列化后的文件名其中包含rot13的字符串和php死亡exit的代码,文件名为options[“path”]+md5(tag_md5(tag))+.php</p>
+</li>
+<li><p>但是经过<code>php://filter/write=string.rot13/resource=&lt;?cuc cucvasb();?&gt;+文件名</code>将写入文件的exit代码rot13编码 而 前面文件名已经rot13编码过的字符则还原成php代码自此成功写入webshell且文件名我们可以计算得出</p>
+</li>
+</ol>
+<p>   具体的Exp在师傅们的Blog中已经给出,就不写出来了,因为最近重新装了系统,linux环境没换上就没有经典的弹calc图了,求原谅 :) </p>
+<p>   师傅们tql  Orz</p>
+<blockquote>
+<p>0x03 补充</p>
+</blockquote>
+<p>补充:在先知中已经看到有师傅提供了在Windows下利用的解决方法,这里补充一下</p>
+<p><em>之前对Thinkphp5.0.24中存在的反序列化利用链进行了分析,说到因为写入方式的问题导致在Windows环境下不可用的问题,后面在先知看到某师傅的一篇文章,发现还是有办法在Windows环境下控制文件名进行写入,文章地址:</em><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/7310">关于 ThinkPHP5.0 反序列化链的扩展</a></p>
+<blockquote>
+<p>重新跟踪</p>
+</blockquote>
+<p>在<code>thinkphp/library/think/session/driver/Memcache.php</code>文件的92行处进行了文件写入</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">write</span>(<span class="params">$sessID, $sessData</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;handler-&gt;set(<span class="keyword">$this</span>-&gt;config[<span class="string">&#x27;session_name&#x27;</span>] . $sessID, $sessData, <span class="keyword">$this</span>-&gt;config[<span class="string">&#x27;expire&#x27;</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这里我们可以看到session_name是通过config获取的,而config数组又可控,所以可以通过控制session_name的值为我们的php代码即可,至于与WIndows文件写入有啥关系,我们继续向下跟<code>thinkphp/library/think/cache/driver/File.php</code> 文件 <code>141</code>行</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">set</span>(<span class="params">$name, $value, $expire = <span class="literal">null</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (is_null($expire)) &#123;</span><br><span class="line">            $expire = <span class="keyword">$this</span>-&gt;options[<span class="string">&#x27;expire&#x27;</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> ($expire <span class="keyword">instanceof</span> \DateTime) &#123;</span><br><span class="line">            $expire = $expire-&gt;getTimestamp() - time();</span><br><span class="line">        &#125;</span><br><span class="line">        $filename = <span class="keyword">$this</span>-&gt;getCacheKey($name, <span class="literal">true</span>);</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;tag &amp;&amp; !is_file($filename)) &#123;</span><br><span class="line">            $first = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        $data = serialize($value);</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;options[<span class="string">&#x27;data_compress&#x27;</span>] &amp;&amp; function_exists(<span class="string">&#x27;gzcompress&#x27;</span>)) &#123;</span><br><span class="line">            <span class="comment">//数据压缩</span></span><br><span class="line">            $data = gzcompress($data, <span class="number">3</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        $data   = <span class="string">&quot;&lt;?php\n//&quot;</span> . sprintf(<span class="string">&#x27;%012d&#x27;</span>, $expire) . <span class="string">&quot;\n exit();?&gt;\n&quot;</span> . $data;</span><br><span class="line">        $result = file_put_contents($filename, $data);</span><br><span class="line">        <span class="keyword">if</span> ($result) &#123;</span><br><span class="line">            <span class="keyword">isset</span>($first) &amp;&amp; <span class="keyword">$this</span>-&gt;setTagItem($filename);</span><br><span class="line">            clearstatcache();</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>前面写的文章中说明了为啥只能在Linux环境下利用的原因,因为在getCacheKey方法中,options数组中的path值已经固定,且文件内容不可控导致无法getshell,于是找到了setTagItem方法,该方法中进行了二次文件写入,写入的内容就是第一次写入的文件名,然而options数组中的path的值一直没有改变(文件名开头一直为rao13编码后的php代码)所以导致虽然能控制文件写入的内容,但文件名中包含了特殊字符,导致不能在windows环境下利用成功</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">getCacheKey</span>(<span class="params">$name, $auto = <span class="literal">false</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    $name = md5($name);</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;options[<span class="string">&#x27;cache_subdir&#x27;</span>]) &#123;</span><br><span class="line">        <span class="comment">// 使用子目录</span></span><br><span class="line">        $name = substr($name, <span class="number">0</span>, <span class="number">2</span>) . DS . substr($name, <span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;options[<span class="string">&#x27;prefix&#x27;</span>]) &#123;</span><br><span class="line">        $name = <span class="keyword">$this</span>-&gt;options[<span class="string">&#x27;prefix&#x27;</span>] . DS . $name;</span><br><span class="line">    &#125;</span><br><span class="line">    $filename = <span class="keyword">$this</span>-&gt;options[<span class="string">&#x27;path&#x27;</span>] . $name . <span class="string">&#x27;.php&#x27;</span>;</span><br><span class="line">    $dir      = dirname($filename);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ($auto &amp;&amp; !is_dir($dir)) &#123;</span><br><span class="line">        mkdir($dir, <span class="number">0755</span>, <span class="literal">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> $filename;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但是看了师傅的方法是,刚刚开头的session_name处这里可以控制第一次写入的文件名,而options数组中的path值就不需要加入我们的rao13编码后的php代码,能实现控制第一次写入的文件名,不影响第二次写入的文件名,从而在Windows环境下的利用</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">setTagItem</span>(<span class="params">$name</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;tag) &#123;</span><br><span class="line">        $key       = <span class="string">&#x27;tag_&#x27;</span> . md5(<span class="keyword">$this</span>-&gt;tag);</span><br><span class="line">        <span class="keyword">$this</span>-&gt;tag = <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;has($key)) &#123;</span><br><span class="line">            $value   = explode(<span class="string">&#x27;,&#x27;</span>, <span class="keyword">$this</span>-&gt;get($key));</span><br><span class="line">            $value[] = $name;</span><br><span class="line">            $value   = implode(<span class="string">&#x27;,&#x27;</span>, array_unique($value));</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            $value = $name;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;set($key, $value, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>大概的过程</p>
+</blockquote>
+<p>第一次进入set方法(session_name+$sessid)然后通过getCacheKey方法返回文件名 options数组path的值为<code>php://filter/write=string.rot13/resource=</code>即可,此时文件名中含有我们开头设置session_name的值为rot13编码后的php代码,然后进入第二次写文件也就是setTagItem方法,进行第二次写文件操作,进入getCacheKey,此时options数组中的path值已经正常,返回的文件名为<code>md5(&#39;tag_&#39; +md5($this-&gt;tag)).php</code>,到了file_put_contents函数$filename为<code>php://filter/write=string.rot13/resource=md5(&#39;tag_&#39; +md5($this-&gt;tag)).php</code></p>
+<p>这里文件名可控,写入的值也可控,就能成功在Windows下利用</p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="m-pagination col-md-8 col-md-offset-2 col-sm-24" role="pagination">
+    
+    <a class="pull-left" href="/2020/04/03/JWT_security_issue/" style="float: left;">
+        ← Jwt security issue
+    </a>
+    
+    
+    <a class="pull-right" href="/2020/03/16/CVE-2020-2551/">
+        CVE-2020-2551复现 →
+    </a>
+    
+</nav>
+
+        <div class="col-md-8 col-md-offset-2 col-sm-24"><script type="text/javascript">
+  /**
+   * 搜狐畅言
+   */
+
+  /*
+  document.write('<div id="SOHUCS" sid="' + window.location.pathname.slice(1) + '" ></div>');
+
+  window.onload = function () {
+    (function () {
+      var appid = 'cytXXXX';
+      var conf = 'prod_xxxxxxxxxxxxxxxxx';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      var loadJs = function (d, a, id) {
+        var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement;
+        var b = document.createElement("script");
+        b.setAttribute("type", "text/javascript");
+        b.setAttribute("charset", "UTF-8");
+        b.setAttribute("src", d);
+        if (id) {
+          b.setAttribute("id", id);
+        }
+        if (typeof a === "function") {
+          if (window.attachEvent) {
+            b.onreadystatechange = function () {
+              var e = b.readyState;
+              if (e === "loaded" || e === "complete") {
+                b.onreadystatechange = null;
+                a()
+              }
+            }
+          } else {
+            b.onload = a
+          }
+        }
+        c.appendChild(b)
+      };
+
+      loadJs("https://changyan.sohu.com/upload/changyan.js", function () {
+        window.changyan.api.config({
+          appid: appid,
+          conf: conf
+        })
+      });
+    })();
+  }
+  */
+
+</script>
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By 1x2Bytes. All Rights Reserved.
+                </p>
+                <p>Theme By <a target="_blank" rel="noopener" href="//go.kieran.top" style="color: #767D84">Kieran</a></p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/B1eed" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<!-- ============================ END Footer =========================== -->
+      <!-- Load our scripts -->
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+
+    resizeHero();
+
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$('#intro').find('img').each(function(){
+  var alt = this.alt;
+
+  if (alt){
+    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
+  }
+
+  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
+});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+      
+</body>
+</html>
