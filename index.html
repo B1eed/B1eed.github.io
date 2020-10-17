@@ -211,6 +211,43 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
                 <div class="col-md-4">
+                    <h3><a href="/2020/09/28/yii2-pop/">yii2框架中存在的几条POP链学习</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2020-09-28T04:17:18.000Z" itemprop="datePublished">
+          2020-09-28
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        影响版本:Yii2 &lt; 2.0.38
+首先搜索反序列化起始点__destruct魔术方法,在结果的最后一行可以找到存在问题的__destruct
+方法
+
+在\vendor\yiisoft\yii2\db\BatchQueryResult.php文件的79行的__destruct方法调用了reset方法,reset方法中存在的_dataReader值可控只需访问不存在close的类即可触发__call魔术方法
+调用的利用点如图:
+
+
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2020/09/28/yii2-pop/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
                     <h3><a href="/2020/04/25/jojo-rce-record/">记一次命令执行的奇妙冒险</a></h3>
                     <span>
                         <span class="post-meta">
