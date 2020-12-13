@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Archives: 2020/9 | 1x2Bytes Blog</title>
+  <title>JFinal-RedisCache-unserializer | 1x2Bytes Blog</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -59,7 +59,7 @@
 </head>
 
 <!--
-<body class="home-template">
+<body class="post-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -173,69 +173,107 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
 
-      <!-- ============================ Hero Image =========================== -->
-
-<section id="hero" class="scrollme">
-    <div class="container-fluid element-img" style="background: url(/img/bg_img.jpg) no-repeat center center fixed;background-size: cover">
-        <div class="row">
-            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
-                <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
-                    <div>
-                        
-                        <h2><span>Halo</span></h2>
-                        <p></p>
-                        
-                        <h2></h2>
-                        <p>成就他人是一种伟大的行为</p>
-                        
-
-                    </div>
-                </div>
-            </div>
-            <!-- // .col-md-12 -->
-        </div>
-        <div class="herofade beige-dk"></div>
-    </div>
-</section>
-
-<!-- Height spacing helper -->
-<div class="heightblock"></div>
-<!-- // End height spacing helper -->
-
-<!-- ============================ END Hero Image =========================== -->
-
-
-
-
-<section id="services">
+      
+<section id="intro">
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="row boxes">
-                    
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2020/09/28/yii2-pop/">yii2框架中存在的几条POP链学习</a></h4>
-                            
-                            <p><time datetime="2020-09-28T04:17:18.000Z"><a href="/2020/09/28/yii2-pop/">2020-09-28</a></time></p>
-                        </div>
-                    
-                </div>
-            </div>    
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2020-12-05T10:12:36.000Z" itemprop="datePublished">
+          2020-12-05
+      </time>
+    
+</span>
+                <h1>JFinal-RedisCache-unserializer</h1>
+            </div>
         </div>
-    </div>
-</section> 
+        <div class="col-md-8 col-md-offset-2">
+      		<p><strong>在Jfinal使用redis缓存时存在的反序列化问题</strong></p>
+<p><code>src/main/java/com/jfinal/plugin/redis/serializer/JdkSerializer.java#valueFromBytes</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">valueFromBytes</span><span class="params">(<span class="keyword">byte</span>[] bytes)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (bytes == <span class="keyword">null</span> || bytes.length == <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>; </span><br><span class="line">  ObjectInputStream objectInput = <span class="keyword">null</span>;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    ByteArrayInputStream bytesInput = <span class="keyword">new</span> ByteArrayInputStream(bytes);</span><br><span class="line">    objectInput = <span class="keyword">new</span> ObjectInputStream(bytesInput);</span><br><span class="line">    <span class="keyword">return</span> objectInput.readObject();</span><br><span class="line">  &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</span><br><span class="line">  &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (objectInput != <span class="keyword">null</span>)</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">        objectInput.close();</span><br><span class="line">      &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        LogKit.error(e.getMessage(), e);</span><br><span class="line">      &#125;  </span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>满堂花醉三千客,一剑霜寒十四州</p>
+<p>可以看到调用了readObject,我们看看在哪使用了valueFromBytes方法</p>
+<p>发现在<code>src/main/java/com/jfinal/plugin/redis/Cache.java#get</code> 使用了valueFromBytes方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> &lt;T&gt; <span class="function">T <span class="title">get</span><span class="params">(Object key)</span> </span>&#123;</span><br><span class="line">  Jedis jedis = getJedis();</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (T)valueFromBytes(jedis.get(keyToBytes(key)));</span><br><span class="line">  &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    close(jedis);</span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>又有多个方法调用了valueFromBytes  但是get方法是通过查询redis键所对应的值 比较 常用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> Object <span class="title">valueFromBytes</span><span class="params">(<span class="keyword">byte</span>[] bytes)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.serializer.valueFromBytes(bytes);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>返回的是serializer的对象中的方法,默认serializer指定的对象FstSerializer,我们需要在传入RedisPlugin为JdkSerializer才能进入readObject</p>
+<p>在配置中需要指定</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">configPlugin</span><span class="params">(Plugins me)</span> </span>&#123;</span><br><span class="line">RedisPlugin redis = <span class="keyword">new</span> RedisPlugin(<span class="string">&quot;evilRedis&quot;</span>,<span class="string">&quot;127.0.0.1&quot;</span>);</span><br><span class="line">redis.setSerializer(<span class="keyword">new</span> JdkSerializer());</span><br><span class="line">me.add(redis);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用缓存时触发</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Cache userCache = Redis.use(<span class="string">&quot;evilRedis&quot;</span>);</span><br><span class="line">userCache.get(<span class="string">&quot;data&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>进入redis在data这个键值中修改为Yso生成的目标有的依赖链 将反序列化的字节码存入data键所对应的值中 访问触发缓存即可RCE</p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
+        <nav class="m-pagination col-md-8 col-md-offset-2 col-sm-24" role="pagination">
+    
+    
+    <a class="pull-right" href="/2020/12/03/Thinkphp5.0.24-unserialize/">
+        Thinkphp5.0.24 反序列化链学习 →
+    </a>
+    
+</nav>
+
+        <div class="col-md-8 col-md-offset-2 col-sm-24"><script type="text/javascript">
+  /**
+   * 搜狐畅言
+   */
+
+  /*
+  document.write('<div id="SOHUCS" sid="' + window.location.pathname.slice(1) + '" ></div>');
+
+  window.onload = function () {
+    (function () {
+      var appid = 'cytXXXX';
+      var conf = 'prod_xxxxxxxxxxxxxxxxx';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      var loadJs = function (d, a, id) {
+        var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement;
+        var b = document.createElement("script");
+        b.setAttribute("type", "text/javascript");
+        b.setAttribute("charset", "UTF-8");
+        b.setAttribute("src", d);
+        if (id) {
+          b.setAttribute("id", id);
+        }
+        if (typeof a === "function") {
+          if (window.attachEvent) {
+            b.onreadystatechange = function () {
+              var e = b.readyState;
+              if (e === "loaded" || e === "complete") {
+                b.onreadystatechange = null;
+                a()
+              }
+            }
+          } else {
+            b.onload = a
+          }
+        }
+        c.appendChild(b)
+      };
+
+      loadJs("https://changyan.sohu.com/upload/changyan.js", function () {
+        window.changyan.api.config({
+          appid: appid,
+          conf: conf
+        })
+      });
+    })();
+  }
+  */
+
+</script>
+</div>
     </div>
 </section>
+
+
       
 <!-- ============================ Footer =========================== -->
 

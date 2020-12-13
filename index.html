@@ -33,7 +33,7 @@
     <link rel="alternate" href="/atom.xml" title="1x2Bytes Blog" type="application/atom+xml">
     <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
     
-    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    <link rel="stylesheet" href="/highlightjs/monokai_sublime.css" type="text/css">
     
 
     <!--[if IE 8]>
@@ -182,7 +182,7 @@
                 <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
                     <div>
                         
-                        <h2>YOU'VE MADE A <span>BRAVE</span> DECISION, WELCOME.</h2>
+                        <h2><span>Halo</span></h2>
                         <p></p>
                         
                         <h2></h2>
@@ -207,6 +207,103 @@
 
 <section id="intro">
     <div class="container">
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2020/12/05/Jfinal_readObject/">JFinal-RedisCache-unserializer</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2020-12-05T10:12:36.000Z" itemprop="datePublished">
+          2020-12-05
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        在Jfinal使用redis缓存时存在的反序列化问题
+src/main/java/com/jfinal/plugin/redis/serializer/JdkSerializer.java#valueFromBytes
+12345678910111213141516171819public Object valueFromBytes(byte[] bytes) &#123;  if (bytes == null || bytes.len
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2020/12/05/Jfinal_readObject/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2020/12/03/Thinkphp5.0.24-unserialize/">Thinkphp5.0.24 反序列化链学习</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2020-12-03T11:15:54.000Z" itemprop="datePublished">
+          2020-12-03
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        这条链是某师傅在先知对一个Tp5.0.24开发的CMS审计时发现的一个触发点的利用,本来该利用点只能完成SSRF与任意文件删除的,为了提升危害,于是又从TP5.0.24中挖掘出了这一条通过写入文件Getshell的的Pop链(师傅们实在tql,枯了)
+关于这条链先知上已经有几篇分析过了,了解了几点:
+1.当目标目录无写入权限时我们可以创建一个权限为0755的文件夹,然后写shell
+2.使用php伪协议写入shell绕过死亡exit,因
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2020/12/03/Thinkphp5.0.24-unserialize/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2020/11/14/Java-URLDNS/">Java反序列化学习之URLDNS</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2020-11-14T10:15:16.000Z" itemprop="datePublished">
+          2020-11-14
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        URLDNS用于发送DNS请求来探测是否存在反序列化,因为该gadget没有过多依赖(jdk自带)
+下面这一段是从ysoserial 截取出来的代码
+12345678public Object getObject(final String url) throws Exception &#123;             URLStreamHandler handler = new SilentURLStreamHandler();   
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2020/11/14/Java-URLDNS/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
         
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
@@ -306,39 +403,6 @@ Header结构1234
                     
                     <p class="pull-right readMore">
                         <a href="/2020/04/03/JWT_security_issue/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2020/03/26/Thinkphp5.0.24-unserialize/">Thinkphp5.0.24 反序列化链学习</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2020-03-25T17:09:04.000Z" itemprop="datePublished">
-          2020-03-26
-      </time>
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        这条链是某师傅在先知对一个Tp5.0.24开发的CMS审计时发现的一个触发点的利用,本来该利用点只能完成SSRF与任意文件删除的,为了提升危害,于是又从TP5.0.24中挖掘出了这一条通过写入文件Getshell的的Pop链(师傅们实在tql,枯了)
-关于这条链先知上已经有几篇分析过了,了解了几点:
-1.当目标目录无写入权限时我们可以创建一个权限为0755的文件夹,然后写shell
-2.使用php伪协议写入shell绕过死亡exit,因
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2020/03/26/Thinkphp5.0.24-unserialize/">Read More...</a>
                     </p>
                     
                 </div>
