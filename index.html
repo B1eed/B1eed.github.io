@@ -211,6 +211,39 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
                 <div class="col-md-4">
+                    <h3><a href="/2021/02/06/Thinkphp3.2_file_delete_pop/">Thinkphp3.2 任意文件删除Pop链</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2021-02-06T10:04:32.000Z" itemprop="datePublished">
+          2021-02-06
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        Thinkphp3.2 在查找反序列化链时发现其存在一条任意文件删除的反序列化链
+0x01 发现过程搜索全局__destruct 魔术方法,发现在文件ThinkPHP\Library\Vendor\Smarty\sysplugins\smarty_internal_template.php 675 行
+可以看出是Thinkphp第三方扩展Smarty 模板引擎的类文件
+123456public function __destruct()
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2021/02/06/Thinkphp3.2_file_delete_pop/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
                     <h3><a href="/2020/12/05/Jfinal_readObject/">JFinal-RedisCache-unserializer</a></h3>
                     <span>
                         <span class="post-meta">
